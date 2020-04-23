@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct GramoView: View {
-    @Binding var PM:PlayerManager
+    @EnvironmentObject var PM:PlayerManager
+    @Binding var stylusPos:CGPoint
     
     var body: some View {
         GeometryReader{geo in
@@ -24,32 +25,34 @@ struct GramoView: View {
                     .resizable()
                     .frame(width: 40, height: 100)
                     .onAppear(perform: {
-                        self.PM.stylusPos = .init(x: 25, y: 2 * geo.size.height/3)
+                        self.stylusPos = .init(x: 25, y: 2 * geo.size.height/3)
                     })
-                    .position(x: self.PM.stylusPos.x, y: self.PM.isPlaying ? self.PM.stylusPos.y : self.PM.stylusPos.y - 30)
+                    .position(x: self.stylusPos.x, y: self.PM.isPlaying ? self.stylusPos.y : self.stylusPos.y - 30)
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                         .onChanged{value in
-                            self.PM.stylusPos.x = value.location.x
-                            if self.PM.stylusPos.x < 25 {self.PM.stylusPos.x = 25}
-                            if self.PM.stylusPos.x > self.PM.screenWdith {self.PM.stylusPos.x = self.PM.screenWdith}
-                            self.PM.stylusPos.y = 2 * geo.size.height/3 - 20
+                            self.stylusPos.x = value.location.x
+                            if self.stylusPos.x < 25 {self.stylusPos.x = 25}
+                            if self.stylusPos.x > self.PM.screenWdith {self.stylusPos.x = self.PM.screenWdith}
+                            self.stylusPos.y = 2 * geo.size.height/3 - 20
                             
                             // change progress
-                            self.PM.player.pause()
+//                            self.PM.player.pause()
                             self.PM.isPlaying = false
                     }
                     .onEnded{value in
-                        self.PM.stylusPos.x = value.location.x
-                        self.PM.stylusPos.y = 2 * geo.size.height/3
+                        self.stylusPos.x = value.location.x
+                        self.stylusPos.y = 2 * geo.size.height/3
                         
                         // continue playing at where the stylus is
-                        let currentTime = Double((self.PM.stylusPos.x - 25)/self.PM.screenWdith) * self.PM.player.duration
+                        let currentTime = Double((self.stylusPos.x - 25)/self.PM.screenWdith) * self.PM.player.duration
                         self.PM.player.currentTime = currentTime
-                        self.PM.isPlaying = true
-                        self.PM.player.play()
+                        if self.stylusPos.x != self.PM.screenWdith && self.PM.player.isPlaying {
+                            self.PM.isPlaying = true
+                            self.PM.player.play()
+                        }
                         DispatchQueue.global(qos: .background).async {
                             while self.PM.isPlaying {
-                                self.PM.stylusPos.x = self.PM.timeForLabel + 25
+                                self.stylusPos.x = self.PM.timeForLabel + 25
                             }
                         }
                     })

@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct PlaygroundView: View {
+    @EnvironmentObject var PM:PlayerManager
     @State var showWave:Bool = false
     @State var wavePos:CGPoint = .zero
-    var hapticManager:HapticManager = HapticManager()
     
     var body: some View {
         ZStack{
@@ -26,7 +26,7 @@ struct PlaygroundView: View {
                     .onEnded{value in
                         self.showWave = false
                         self.wavePos = value.location
-                        do{ try self.hapticManager.player.start(atTime: 0)}catch{}
+                        do{ try self.PM.hapticManager.HapticPlayer.start(atTime: 0)}catch{}
                 })
             Circle()
                 .stroke(lineWidth:2)

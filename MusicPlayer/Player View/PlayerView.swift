@@ -10,8 +10,9 @@ import SwiftUI
 import AVKit
 
 struct PlayerView: View {
-    @State var PM = PlayerManager()
+    @EnvironmentObject var PM:PlayerManager
     @State var showPlayground:Bool = false
+    @State var stylusPos:CGPoint = .zero
     
     var body: some View {
         GeometryReader{geo in
@@ -23,18 +24,21 @@ struct PlayerView: View {
                             .padding()
                         ZStack{
                             // album cover
-                            Rectangle()
-                                .foregroundColor(.rgb(r: 251, g: 195, b: 126))
-//                            Image(uiImage: (self.PM.data.count == 0 ? UIImage(systemName: "play.rectangle.fill"):UIImage(data: self.PM.data))!)
-//                                .resizable()
-                                
+                            ZStack{
+                                Rectangle()
+                                    .foregroundColor(.rgb(r: 251, g: 195, b: 126))
+                                    .isHidden(self.PM.data.count != 0)
+                                Image(uiImage: (self.PM.data.count == 0 ? UIImage(systemName: "play.rectangle.fill"):UIImage(data: self.PM.data))!)
+                                    .resizable()
+                                    .isHidden(self.PM.data.count == 0)
+                            }.frame(width: geo.size.width - 25, height: geo.size.width - 25)
                             
-                            GramoView(PM: self.$PM)
+                            GramoView(stylusPos: self.$stylusPos)
                         }.frame(height:geo.size.height/2)
                             .padding()
                         
                         // play button
-                        PlayButtonView(PM: self.$PM)
+                        PlayButtonView(stylusPos: self.$stylusPos)
                             .frame(height: 100)
                         
                         Spacer()
@@ -46,9 +50,11 @@ struct PlayerView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width:50)
                         .padding()
-                        .onTapGesture {
-                            self.showPlayground.toggle()
-                    }
+                        .gesture(DragGesture()
+                            .onEnded{value in
+                                if value.translation.height < 0 {self.showPlayground.toggle()}
+                            }
+                        )
                     .isHidden(self.showPlayground)
                 }.frame(width: geo.size.width, height: geo.size.height)
                 ZStack(alignment: .top){
@@ -59,12 +65,14 @@ struct PlayerView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width:50)
                         .padding()
-                        .onTapGesture {
-                            self.showPlayground.toggle()
-                    }
-                    .isHidden(!self.showPlayground)
+                        .gesture(DragGesture()
+                            .onEnded{value in
+                                if value.translation.height > 0 {self.showPlayground.toggle()}
+                            }
+                        )
+                        .isHidden(!self.showPlayground)
                 }.frame(width: geo.size.width, height: geo.size.height)
-            }.offset(y: self.showPlayground ? -geo.size.width:geo.size.width)
+            }.offset(y: self.showPlayground ? -geo.size.width : geo.size.width)
                 .animation(.linear)
                 .onAppear{
                     self.PM.getData()

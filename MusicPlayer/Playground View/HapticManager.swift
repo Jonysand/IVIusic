@@ -12,11 +12,12 @@ import CoreHaptics
 class HapticManager{
     var hapticEngine:CHHapticEngine!
     var pattern: CHHapticPattern!
-    var player: CHHapticPatternPlayer!
+    var HapticPlayer: CHHapticPatternPlayer!
     
     init() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {return}
-        do { hapticEngine = try CHHapticEngine()
+        do {
+            hapticEngine = try CHHapticEngine()
         } catch let error {
             fatalError("Engine Creation Error: \(error)")
         }
@@ -65,7 +66,7 @@ class HapticManager{
         ] // End of haptic dictionary
         do{
             pattern = try CHHapticPattern(dictionary: hapticDict)
-            player = try hapticEngine.makePlayer(with: pattern)
+            HapticPlayer = try hapticEngine.makePlayer(with: pattern)
             try hapticEngine.start()
         }catch{}
     }

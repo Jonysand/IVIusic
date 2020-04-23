@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7502D3B0244FCA27009B63C2 /* Cut In Love.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7502D3AD244FCA27009B63C2 /* Cut In Love.mp3 */; };
+		7502D3B1244FCA27009B63C2 /* Dynasty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7502D3AE244FCA27009B63C2 /* Dynasty.mp3 */; };
+		7502D3B4244FCA73009B63C2 /* Sansin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7502D3B3244FCA73009B63C2 /* Sansin.mp3 */; };
 		752C3BA7244D1B0E001006A3 /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752C3BA6244D1B0E001006A3 /* PlayButtonView.swift */; };
 		752C3BA9244D230A001006A3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752C3BA8244D230A001006A3 /* PlayerView.swift */; };
 		7567BD15244EA48700A80885 /* DebugSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567BD14244EA48700A80885 /* DebugSongs.swift */; };
@@ -20,14 +23,14 @@
 		75C35D25244E12BC00CC2755 /* GramoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C35D24244E12BC00CC2755 /* GramoView.swift */; };
 		75C35D27244E267B00CC2755 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C35D26244E267B00CC2755 /* HapticManager.swift */; };
 		75C35D2C244E31CB00CC2755 /* MusicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C35D2B244E31CB00CC2755 /* MusicListView.swift */; };
-		75DBF305244E3D380019A251 /* Sansin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75DBF302244E3D380019A251 /* Sansin.mp3 */; };
-		75DBF306244E3D380019A251 /* CutInLove.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75DBF303244E3D380019A251 /* CutInLove.mp3 */; };
-		75DBF307244E3D380019A251 /* Dynasty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75DBF304244E3D380019A251 /* Dynasty.mp3 */; };
 		75E483E5244D507A0083975D /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E483E4244D507A0083975D /* PlaygroundView.swift */; };
 		75E483E7244D50B90083975D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E483E6244D50B90083975D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7502D3AD244FCA27009B63C2 /* Cut In Love.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cut In Love.mp3"; sourceTree = "<group>"; };
+		7502D3AE244FCA27009B63C2 /* Dynasty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dynasty.mp3; sourceTree = "<group>"; };
+		7502D3B3244FCA73009B63C2 /* Sansin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sansin.mp3; sourceTree = "<group>"; };
 		752C3BA6244D1B0E001006A3 /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
 		752C3BA8244D230A001006A3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		7567BD14244EA48700A80885 /* DebugSongs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSongs.swift; sourceTree = "<group>"; };
@@ -43,9 +46,6 @@
 		75C35D24244E12BC00CC2755 /* GramoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramoView.swift; sourceTree = "<group>"; };
 		75C35D26244E267B00CC2755 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		75C35D2B244E31CB00CC2755 /* MusicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListView.swift; sourceTree = "<group>"; };
-		75DBF302244E3D380019A251 /* Sansin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sansin.mp3; sourceTree = "<group>"; };
-		75DBF303244E3D380019A251 /* CutInLove.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CutInLove.mp3; sourceTree = "<group>"; };
-		75DBF304244E3D380019A251 /* Dynasty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dynasty.mp3; sourceTree = "<group>"; };
 		75E483E4244D507A0083975D /* PlaygroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundView.swift; sourceTree = "<group>"; };
 		75E483E6244D50B90083975D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +84,7 @@
 				75AB675D244CD5B500C72493 /* SceneDelegate.swift */,
 				75AB675F244CD5B500C72493 /* ContentView.swift */,
 				75E483E6244D50B90083975D /* Extensions.swift */,
+				7567BD16244EA58B00A80885 /* PlayerManager.swift */,
 				75DBF301244E3B180019A251 /* Demo Songs */,
 				75C35D28244E26EB00CC2755 /* Player View */,
 				75C35D29244E270700CC2755 /* Playground View */,
@@ -110,7 +111,6 @@
 				752C3BA8244D230A001006A3 /* PlayerView.swift */,
 				75C35D24244E12BC00CC2755 /* GramoView.swift */,
 				752C3BA6244D1B0E001006A3 /* PlayButtonView.swift */,
-				7567BD16244EA58B00A80885 /* PlayerManager.swift */,
 				7567BD14244EA48700A80885 /* DebugSongs.swift */,
 			);
 			path = "Player View";
@@ -136,9 +136,9 @@
 		75DBF301244E3B180019A251 /* Demo Songs */ = {
 			isa = PBXGroup;
 			children = (
-				75DBF303244E3D380019A251 /* CutInLove.mp3 */,
-				75DBF304244E3D380019A251 /* Dynasty.mp3 */,
-				75DBF302244E3D380019A251 /* Sansin.mp3 */,
+				7502D3AD244FCA27009B63C2 /* Cut In Love.mp3 */,
+				7502D3B3244FCA73009B63C2 /* Sansin.mp3 */,
+				7502D3AE244FCA27009B63C2 /* Dynasty.mp3 */,
 			);
 			path = "Demo Songs";
 			sourceTree = "<group>";
@@ -201,11 +201,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75DBF305244E3D380019A251 /* Sansin.mp3 in Resources */,
-				75DBF307244E3D380019A251 /* Dynasty.mp3 in Resources */,
+				7502D3B4244FCA73009B63C2 /* Sansin.mp3 in Resources */,
 				75AB6768244CD5B700C72493 /* LaunchScreen.storyboard in Resources */,
+				7502D3B1244FCA27009B63C2 /* Dynasty.mp3 in Resources */,
 				75AB6765244CD5B700C72493 /* Preview Assets.xcassets in Resources */,
-				75DBF306244E3D380019A251 /* CutInLove.mp3 in Resources */,
+				7502D3B0244FCA27009B63C2 /* Cut In Love.mp3 in Resources */,
 				75AB6762244CD5B700C72493 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
