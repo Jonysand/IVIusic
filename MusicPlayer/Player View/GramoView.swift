@@ -16,16 +16,14 @@ struct GramoView: View {
         GeometryReader{geo in
             ZStack{
                 // simulate disc
-                Rectangle()
-                    .frame(width: geo.size.width, height:10)
-                    .position(x: geo.size.width/2, y:2 * geo.size.height/3+50)
+//                DiscView()
                 
                 // stylus
                 Image(systemName: "arrowtriangle.down.fill")
                     .resizable()
-                    .frame(width: 40, height: 100)
+                    .frame(width: 20, height: 50)
                     .onAppear(perform: {
-                        self.stylusPos = .init(x: 25, y: 2 * geo.size.height/3)
+                        self.stylusPos = .init(x: 25, y: geo.size.height - 25)
                     })
                     .position(x: self.stylusPos.x, y: self.PM.isPlaying ? self.stylusPos.y : self.stylusPos.y - 30)
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
@@ -33,7 +31,7 @@ struct GramoView: View {
                             self.stylusPos.x = value.location.x
                             if self.stylusPos.x < 25 {self.stylusPos.x = 25}
                             if self.stylusPos.x > self.PM.screenWdith {self.stylusPos.x = self.PM.screenWdith}
-                            self.stylusPos.y = 2 * geo.size.height/3 - 20
+                            self.stylusPos.y = geo.size.height - 50
                             
                             // change progress
 //                            self.PM.player.pause()
@@ -41,7 +39,7 @@ struct GramoView: View {
                     }
                     .onEnded{value in
                         self.stylusPos.x = value.location.x
-                        self.stylusPos.y = 2 * geo.size.height/3
+                        self.stylusPos.y = geo.size.height - 25
                         
                         // continue playing at where the stylus is
                         let currentTime = Double((self.stylusPos.x - 25)/self.PM.screenWdith) * self.PM.player.duration

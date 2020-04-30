@@ -9,13 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var PM:PlayerManager
     var body: some View {
-        PlayerView()
+        TabView{
+            MusicListView()
+                .tabItem{
+                    Image(systemName: "music.note.list")
+                    Text("Music")
+                        .font(.headline)
+            }
+            PlaygroundView()
+                .tabItem{
+                    Image(systemName: "waveform.path.ecg")
+                    Text("Playground")
+                        .font(.headline)
+            }
+        }.animation(.linear)
+        .onAppear{
+                self.PM.getData()
+        }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}

@@ -13,6 +13,7 @@ class HapticManager{
     var hapticEngine:CHHapticEngine!
     var pattern: CHHapticPattern!
     var HapticPlayer: CHHapticPatternPlayer!
+    let hapticPatterns = HapticPatterns()
     
     init() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {return}
@@ -30,42 +31,8 @@ class HapticManager{
                 fatalError("Failed to restart the engine: \(error)")
             }
         }
-        let hapticDict = [
-            CHHapticPattern.Key.pattern: [
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.001,
-                      CHHapticPattern.Key.eventDuration: 1.0] // End of first event
-                ], // End of first dictionary entry in the array
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.101,
-                      CHHapticPattern.Key.eventDuration: 1.0]
-                ],
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.201,
-                      CHHapticPattern.Key.eventDuration: 2.0]
-                ],
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.401,
-                      CHHapticPattern.Key.eventDuration: 2.0]
-                ],
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.601,
-                      CHHapticPattern.Key.eventDuration: 3.0]
-                ],
-                [CHHapticPattern.Key.event:
-                    [CHHapticPattern.Key.eventType: CHHapticEvent.EventType.hapticTransient,
-                      CHHapticPattern.Key.time: 0.901,
-                      CHHapticPattern.Key.eventDuration: 3.0]
-                ]
-            ] // End of array
-        ] // End of haptic dictionary
         do{
-            pattern = try CHHapticPattern(dictionary: hapticDict)
+            pattern = try CHHapticPattern(dictionary: self.hapticPatterns.hapticImpulse)
             HapticPlayer = try hapticEngine.makePlayer(with: pattern)
             try hapticEngine.start()
         }catch{}

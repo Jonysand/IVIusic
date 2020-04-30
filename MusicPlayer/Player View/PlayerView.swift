@@ -11,78 +11,57 @@ import AVKit
 
 struct PlayerView: View {
     @EnvironmentObject var PM:PlayerManager
-    @State var showPlayground:Bool = false
     @State var stylusPos:CGPoint = .zero
+    @State var playButtonOffset = CGSize.zero
+    var currentMusicIndex:Int
     
     var body: some View {
         GeometryReader{geo in
             VStack{
+                Spacer()
+                //------------
+                // player view
+                //------------
                 ZStack(alignment:.bottom){
+                    // Main Player view
                     VStack{
-                        Text(self.PM.title)
-                            .font(.title)
-                            .padding()
-                        ZStack{
-                            // album cover
-                            ZStack{
-                                Rectangle()
-                                    .foregroundColor(.rgb(r: 251, g: 195, b: 126))
-                                    .isHidden(self.PM.data.count != 0)
-                                Image(uiImage: (self.PM.data.count == 0 ? UIImage(systemName: "play.rectangle.fill"):UIImage(data: self.PM.data))!)
-                                    .resizable()
-                                    .isHidden(self.PM.data.count == 0)
-                            }.frame(width: geo.size.width - 25, height: geo.size.width - 25)
-                            
-                            GramoView(stylusPos: self.$stylusPos)
-                        }.frame(height:geo.size.height/2)
-                            .padding()
-                        
-                        // play button
-                        PlayButtonView(stylusPos: self.$stylusPos)
-                            .frame(height: 100)
-                        
+                        // music title
+                        VStack{
+                            Text(self.PM.title)
+                                .font(.title)
+                            Text(self.PM.author)
+                                .font(.headline)
+                        }.padding()
                         Spacer()
+                            // album cover
+                        DiscView()
+                            .rotationEffect(.degrees(Double(-self.playButtonOffset.width) * 0.9))
+                        .frame(height:geo.size.height/2)
+                        Spacer()
+                        // Gramo View
+                        GramoView(stylusPos: self.$stylusPos)
+                        // play button
+                        PlayButtonView(stylusPos: self.$stylusPos, playButtonOffset: self.$playButtonOffset)
+                            .frame(height: 80)
                     }
-                    // playground view swipper
-                    Image(systemName: "chevron.compact.up")
-                        .resizable()
-                        .foregroundColor(.gray)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:50)
-                        .padding()
-                        .gesture(DragGesture()
-                            .onEnded{value in
-                                if value.translation.height < 0 {self.showPlayground.toggle()}
+                }.animation(.linear)
+                    .onAppear{
+                        if (self.PM.isPlaying){
+                            DispatchQueue.global(qos: .background).async {
+                                while self.PM.isPlaying {
+                                    self.stylusPos.x = self.PM.timeForLabel + 25
+                                }
                             }
-                        )
-                    .isHidden(self.showPlayground)
-                }.frame(width: geo.size.width, height: geo.size.height)
-                ZStack(alignment: .top){
-                    PlaygroundView()
-                    Image(systemName: "chevron.compact.down")
-                        .resizable()
-                        .foregroundColor(.gray)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:50)
-                        .padding()
-                        .gesture(DragGesture()
-                            .onEnded{value in
-                                if value.translation.height > 0 {self.showPlayground.toggle()}
-                            }
-                        )
-                        .isHidden(!self.showPlayground)
-                }.frame(width: geo.size.width, height: geo.size.height)
-            }.offset(y: self.showPlayground ? -geo.size.width : geo.size.width)
-                .animation(.linear)
-                .onAppear{
-                    self.PM.getData()
+                        }
+                        if(self.currentMusicIndex != self.PM.musicIndex){
+                            self.PM.musicIndex = self.currentMusicIndex
+                            self.PM.getData()
+                            self.PM.player.stop()
+                            self.PM.isPlaying = true
+                            self.PM.player.play()
+                        }
+                }
             }
         }
     }
 }
-
-//struct PlayerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PlayerView()
-//    }
-//}

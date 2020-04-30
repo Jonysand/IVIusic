@@ -8,11 +8,16 @@
 
 import SwiftUI
 import AVKit
+import CoreHaptics
 
 struct PlayButtonView: View {
     @EnvironmentObject var PM:PlayerManager
-    @State var playButtonOffset = CGSize.zero
     @Binding var stylusPos:CGPoint
+    @Binding var playButtonOffset:CGSize
+    
+    // haptic feedback
+    @State var buttonOffsetStep:Int = 0
+    let buttonOffsetStepThresh = 20
     
     var body: some View {
         GeometryReader{ geo in
@@ -20,7 +25,7 @@ struct PlayButtonView: View {
                 // last song
                 ZStack(alignment:.trailing){
                     Rectangle()
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color.init("PlaybuttonSwitch"))
                         .frame(width: geo.size.width)
                     Image(systemName: "backward.fill")
                         .resizable()
@@ -30,7 +35,7 @@ struct PlayButtonView: View {
                 // play button
                 ZStack{
                     Rectangle()
-                        .foregroundColor(.red)
+                        .foregroundColor(Color.init("PlaybuttonPlay"))
                         .frame(width: geo.size.width)
                     Image(systemName: self.PM.isPlaying ? "pause.fill":"play.fill")
                         .resizable()
@@ -40,7 +45,7 @@ struct PlayButtonView: View {
                 // next song
                 ZStack(alignment:.leading){
                     Rectangle()
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color.init("PlaybuttonSwitch"))
                         .frame(width: geo.size.width)
                     Image(systemName: "forward.fill")
                         .resizable()
@@ -50,6 +55,7 @@ struct PlayButtonView: View {
             }.edgesIgnoringSafeArea(.horizontal)
         }
         .onTapGesture {
+            if(self.PM.musicIndex == -1) {return}
             self.PM.isPlaying.toggle()
             if self.PM.isPlaying {self.PM.player.play()}
             else {self.PM.player.pause()}
@@ -63,19 +69,28 @@ struct PlayButtonView: View {
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
         .onChanged{ value in
             self.playButtonOffset = value.translation
+            if (Int(self.playButtonOffset.width)/self.buttonOffsetStepThresh != self.buttonOffsetStep){
+                do{
+                    self.PM.hapticManager.HapticPlayer = try self.PM.hapticManager.hapticEngine.makePlayer(with: try CHHapticPattern(dictionary: self.PM.hapticManager.hapticPatterns.hapticImpulse))
+                    try self.PM.hapticManager.HapticPlayer.start(atTime: 0)
+                }catch{}
+            }
+            self.buttonOffsetStep = Int(self.playButtonOffset.width)/self.buttonOffsetStepThresh
         }
         .onEnded{ value in
             if self.playButtonOffset.width < -100 {
-                self.PM.debugSongs.index += 1
-                if self.PM.debugSongs.index >= self.PM.debugSongs.songList.count {self.PM.debugSongs.index = 0}
-                self.PM.player.stop()
+                self.PM.musicIndex += 1
+                if self.PM.musicIndex >= self.PM.musicList.count {self.PM.musicIndex = 0}
                 self.PM.getData()
+                self.PM.player.stop()
+                self.stylusPos.x = 25
                 if self.PM.isPlaying {self.PM.player.play()}
             }else if self.playButtonOffset.width > 100 {
-                self.PM.debugSongs.index -= 1
-                if self.PM.debugSongs.index < 0 {self.PM.debugSongs.index = self.PM.debugSongs.songList.count-1}
-                self.PM.player.stop()
+                self.PM.musicIndex -= 1
+                if self.PM.musicIndex < 0 {self.PM.musicIndex = self.PM.musicList.count-1}
                 self.PM.getData()
+                self.PM.player.stop()
+                self.stylusPos.x = 25
                 if self.PM.isPlaying {self.PM.player.play()}
             }
             self.playButtonOffset = .zero
