@@ -15,9 +15,6 @@ struct GramoView: View {
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                // simulate disc
-//                DiscView()
-                
                 // stylus
                 Image(systemName: "arrowtriangle.down.fill")
                     .resizable()
@@ -31,7 +28,7 @@ struct GramoView: View {
                             self.stylusPos.x = value.location.x
                             if self.stylusPos.x < 25 {self.stylusPos.x = 25}
                             if self.stylusPos.x > self.PM.screenWdith {self.stylusPos.x = self.PM.screenWdith}
-                            self.stylusPos.y = geo.size.height - 50
+                            self.stylusPos.y = geo.size.height - 45
                             
                             // change progress
 //                            self.PM.player.pause()
@@ -46,6 +43,7 @@ struct GramoView: View {
                         self.PM.player.currentTime = currentTime
                         if self.stylusPos.x != self.PM.screenWdith && self.PM.player.isPlaying {
                             self.PM.isPlaying = true
+                            self.PM.effectPlayer.play()
                             self.PM.player.play()
                         }
                         DispatchQueue.global(qos: .background).async {

@@ -11,6 +11,9 @@
 		75054D942458E6AB000671C4 /* MusicItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75054D932458E6AB000671C4 /* MusicItemView.swift */; };
 		752C3BA7244D1B0E001006A3 /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752C3BA6244D1B0E001006A3 /* PlayButtonView.swift */; };
 		752C3BA9244D230A001006A3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752C3BA8244D230A001006A3 /* PlayerView.swift */; };
+		753CBA7A2461344200831A89 /* gramoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 753CBA792461344200831A89 /* gramoSound.mp3 */; };
+		756402C4245F2BD500357A69 /* MusicVisualizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756402C3245F2BD500357A69 /* MusicVisualizeView.swift */; };
+		756402C6245F321700357A69 /* VisualizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756402C5245F321700357A69 /* VisualizeManager.swift */; };
 		7567BD17244EA58B00A80885 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567BD16244EA58B00A80885 /* PlayerManager.swift */; };
 		75742AB824521DBA004F4A3B /* DiscView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75742AB724521DBA004F4A3B /* DiscView.swift */; };
 		75AB675C244CD5B500C72493 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB675B244CD5B500C72493 /* AppDelegate.swift */; };
@@ -32,6 +35,9 @@
 		75054D932458E6AB000671C4 /* MusicItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicItemView.swift; sourceTree = "<group>"; };
 		752C3BA6244D1B0E001006A3 /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
 		752C3BA8244D230A001006A3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		753CBA792461344200831A89 /* gramoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gramoSound.mp3; sourceTree = "<group>"; };
+		756402C3245F2BD500357A69 /* MusicVisualizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVisualizeView.swift; sourceTree = "<group>"; };
+		756402C5245F321700357A69 /* VisualizeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeManager.swift; sourceTree = "<group>"; };
 		7567BD16244EA58B00A80885 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
 		75742AB724521DBA004F4A3B /* DiscView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscView.swift; sourceTree = "<group>"; };
 		75AB6758244CD5B500C72493 /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		753CBA782461343700831A89 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				753CBA792461344200831A89 /* gramoSound.mp3 */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		75AB674F244CD5B500C72493 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +96,7 @@
 		75AB675A244CD5B500C72493 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				753CBA782461343700831A89 /* Media */,
 				75C62F91245A017100C7BC01 /* Backup */,
 				75AB675B244CD5B500C72493 /* AppDelegate.swift */,
 				75AB675D244CD5B500C72493 /* SceneDelegate.swift */,
@@ -123,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				75E483E4244D507A0083975D /* PlaygroundView.swift */,
+				756402C3245F2BD500357A69 /* MusicVisualizeView.swift */,
+				756402C5245F321700357A69 /* VisualizeManager.swift */,
 				75C35D26244E267B00CC2755 /* HapticManager.swift */,
 				75F7FF802457CA95009D76EA /* HapticPatterns.swift */,
 			);
@@ -208,6 +225,7 @@
 				75AB6768244CD5B700C72493 /* LaunchScreen.storyboard in Resources */,
 				75AB6765244CD5B700C72493 /* Preview Assets.xcassets in Resources */,
 				75AB6762244CD5B700C72493 /* Assets.xcassets in Resources */,
+				753CBA7A2461344200831A89 /* gramoSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +245,10 @@
 				75C35D25244E12BC00CC2755 /* GramoView.swift in Sources */,
 				75AB675E244CD5B500C72493 /* SceneDelegate.swift in Sources */,
 				752C3BA9244D230A001006A3 /* PlayerView.swift in Sources */,
+				756402C6245F321700357A69 /* VisualizeManager.swift in Sources */,
 				75054D942458E6AB000671C4 /* MusicItemView.swift in Sources */,
 				75AB6760244CD5B500C72493 /* ContentView.swift in Sources */,
+				756402C4245F2BD500357A69 /* MusicVisualizeView.swift in Sources */,
 				75C35D27244E267B00CC2755 /* HapticManager.swift in Sources */,
 				75054D922458C42F000671C4 /* testView.swift in Sources */,
 				75F7FF812457CA95009D76EA /* HapticPatterns.swift in Sources */,

@@ -7,30 +7,21 @@
 //
 
 import SwiftUI
-import AVKit
 
 struct testView: View {
-    @EnvironmentObject var PM:PlayerManager
-    let fm = FileManager.default
-    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     var body: some View {
-        Button(action: {
-            do {
-                let items = try self.fm.contentsOfDirectory(at: self.path, includingPropertiesForKeys: .none)
-                for itemURL in items {
-                    if(itemURL.absoluteString.hasSuffix(".mp3")){
-                        let asset = AVAsset(url: itemURL)
-                        for i in asset.commonMetadata{
-                            print(i.commonKey?.rawValue as Any)
-                        }
+        ForEach(0..<20, id:\.self){row in
+            VStack{
+                HStack{
+                    ForEach(0..<10, id:\.self){col in
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(.gray)
+                            .padding()
                     }
                 }
-            } catch {
-                print("Fail read directory")
             }
-        }){
-            Text("Test")
         }
     }
 }

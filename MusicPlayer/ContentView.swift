@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var PM:PlayerManager
+    @State var backgroundReverse:Bool = false
     var body: some View {
         TabView{
             MusicListView()
@@ -18,14 +19,26 @@ struct ContentView: View {
                     Text("Music")
                         .font(.headline)
             }
-            PlaygroundView()
-                .tabItem{
-                    Image(systemName: "waveform.path.ecg")
-                    Text("Playground")
-                        .font(.headline)
+            VStack{
+                Spacer(minLength: 96)
+                PlayerView(currentMusicIndex: self.PM.musicIndex)
+            }
+            .tabItem{
+                Image(systemName: "play.circle")
+                Text("Playing")
+                    .font(.headline)
+            }
+            ZStack{
+                PlaygroundView(backgroundReverse: self.$backgroundReverse)
+                MusicVisualizeView(backgroundReverse: self.$backgroundReverse)
+            }
+            .tabItem{
+                Image(systemName: "waveform.path.ecg")
+                Text("Playground")
+                    .font(.headline)
             }
         }.animation(.linear)
-        .onAppear{
+            .onAppear{
                 self.PM.getData()
         }
     }

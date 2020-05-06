@@ -8,12 +8,13 @@
 
 import SwiftUI
 import CoreHaptics
+import AVKit
 
 struct PlaygroundView: View {
     @EnvironmentObject var PM:PlayerManager
     @State var showWave:Bool = false
     @State var wavePos:CGPoint = .zero
-    @State var backgroundReverse:Bool = false
+    @Binding var backgroundReverse:Bool
     
     var body: some View {
         ZStack{
@@ -27,6 +28,7 @@ struct PlaygroundView: View {
                         try self.PM.hapticManager.HapticPlayer.start(atTime: 0)
                     }catch{}
             }
+//            .opacity(0.3)
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
             .onChanged{value in
                 self.showWave = true
@@ -41,11 +43,13 @@ struct PlaygroundView: View {
                 }catch{}
             })
             Circle()
-                .stroke(lineWidth:2)
+                .stroke(lineWidth:1)
                 .foregroundColor(self.backgroundReverse ? Color.init("LBcolor"):Color.init("ReverseLBcolor"))
                 .frame(width:self.showWave ? 300:0, height:self.showWave ? 300:0)
+                .blur(radius: self.showWave ? 0:2)
                 .position(self.wavePos)
                 .animation(.easeOut)
-        }.edgesIgnoringSafeArea(.vertical)
+        }
+        .edgesIgnoringSafeArea(.vertical)
     }
 }

@@ -31,10 +31,10 @@ struct MusicItemView: View {
                 .blur(radius: 10)
             )
             .overlay(RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 1)
+                .stroke(lineWidth: 3)
                 .foregroundColor(Color.init("ReverseLBcolor"))
                 .opacity(0.1)
-                .blur(radius: 1)
+                .blur(radius: 3)
             )
         }
     }
