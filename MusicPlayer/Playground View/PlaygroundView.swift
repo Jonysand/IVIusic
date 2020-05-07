@@ -43,7 +43,7 @@ struct PlaygroundView: View {
                 }catch{}
             })
             Circle()
-                .stroke(lineWidth:1)
+//                .stroke(lineWidth:1)
                 .foregroundColor(self.backgroundReverse ? Color.init("LBcolor"):Color.init("ReverseLBcolor"))
                 .frame(width:self.showWave ? 300:0, height:self.showWave ? 300:0)
                 .blur(radius: self.showWave ? 0:2)
