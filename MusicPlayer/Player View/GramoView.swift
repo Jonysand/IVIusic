@@ -39,17 +39,21 @@ struct GramoView: View {
                         self.stylusPos.y = geo.size.height - 25
                         
                         // continue playing at where the stylus is
-                        let currentTime = Double((self.stylusPos.x - 25)/self.PM.screenWdith) * self.PM.player.duration
-                        self.PM.player.currentTime = currentTime
-                        if self.stylusPos.x != self.PM.screenWdith && self.PM.player.isPlaying {
-                            self.PM.isPlaying = true
-                            self.PM.effectPlayer.play()
-                            self.PM.player.play()
-                        }
-                        DispatchQueue.global(qos: .background).async {
-                            while self.PM.isPlaying {
-                                self.stylusPos.x = self.PM.timeForLabel + 25
+                        if self.PM.player != nil{
+                            let currentTime = Double((self.stylusPos.x - 25)/self.PM.screenWdith) * self.PM.player.duration
+                            self.PM.player.currentTime = currentTime
+                            if self.stylusPos.x != self.PM.screenWdith && self.PM.player.isPlaying {
+                                self.PM.isPlaying = true
+                                self.PM.effectPlayer.play()
+                                self.PM.player.play()
                             }
+                            DispatchQueue.global(qos: .background).async {
+                                 while self.PM.isPlaying {
+                                    self.stylusPos.x = self.PM.timeForLabel + 25
+                                }
+                            }
+                        }else{
+                            self.stylusPos.x = 25
                         }
                     })
                     .animation(.linear)

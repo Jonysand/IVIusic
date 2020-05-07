@@ -25,7 +25,7 @@ struct MusicVisualizeView: View {
                         HStack{
                             ForEach(0..<4, id:\.self){col in
                                 Circle()
-                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(col+row)/2]), anchor: .center)
+                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(9-col-row)/2]), anchor: .center)
                                     .frame(width:self.circleBounds, height:self.circleBounds)
                             }
                         }
@@ -37,7 +37,7 @@ struct MusicVisualizeView: View {
                         HStack{
                             ForEach(0..<4, id:\.self){col in
                                 Circle()
-                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(3-col+row)/2]), anchor: .center)
+                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(col+6-row)/2]), anchor: .center)
                                     .frame(width:self.circleBounds, height:self.circleBounds)
                             }
                         }
@@ -51,7 +51,7 @@ struct MusicVisualizeView: View {
                         HStack{
                             ForEach(0..<4, id:\.self){col in
                                 Circle()
-                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(col+6-row)/2]), anchor: .center)
+                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(3-col+row)/2]), anchor: .center)
                                     .frame(width:self.circleBounds, height:self.circleBounds)
                             }
                         }
@@ -63,7 +63,7 @@ struct MusicVisualizeView: View {
                         HStack{
                             ForEach(0..<4, id:\.self){col in
                                 Circle()
-                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(9-col-row)/2]), anchor: .center)
+                                    .scale(self.normalizeSoundLevel(level: self.VM.soundSamples[(col+row)/2]), anchor: .center)
                                     .frame(width:self.circleBounds, height:self.circleBounds)
                             }
                         }

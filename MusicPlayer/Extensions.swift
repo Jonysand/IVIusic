@@ -119,3 +119,7 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
         value.append(contentsOf: nextValue())
     }
 }
+
+/*
+ Info.plist -> Bundle name: $(PRODUCT_NAME)
+ */

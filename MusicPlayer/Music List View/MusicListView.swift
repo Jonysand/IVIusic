@@ -41,12 +41,6 @@ struct MusicListView: View {
                     }
                 }
             }.navigationBarTitle("Browse Music")
-//                .navigationBarItems(trailing:
-//                    NavigationLink(destination: PlayerView(currentMusicIndex: self.PM.musicIndex)){
-//                        Image(systemName: "play.circle")
-//                            .imageScale(.large)
-//                    }
-//            )
         }
     }
 }
